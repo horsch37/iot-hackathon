@@ -29,6 +29,9 @@ KDI=$(beeline --showHeader=false --headerInterval=0 --fastConnect=true --outputf
 if [ $KDI -ne 1 ]; then
   beeline --showHeader=false --headerInterval=0 --fastConnect=true --outputformat=tsv2 -n $USR -p "${PASS}" -f kafka_druid_iot.sql 
 fi
+#copy flow.xml.gz
+cp flow.xml.gz /var/lib/nifi/conf
+chown nifi /var/lib/nifi/conf/flow.xml.gz
 
 #Import Zeppelin
 export FNAME=/tmp/$$.cookies.txt

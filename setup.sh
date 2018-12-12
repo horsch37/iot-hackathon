@@ -1,5 +1,6 @@
 #!/bin/bash
-
+SUSR=admin
+SPWD=H0rtonworks%1
 #Create Topics
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_iot --create --if-not-exists --replication-factor 1 --partitions 1
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_alert --create --if-not-exists --replication-factor 1 --partitions 1
@@ -31,7 +32,7 @@ if [ $KDI -ne 1 ]; then
 fi
 
 #stop nifi
-curl -u admin:H0rtonworks\!1 -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop NIFI"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/NIFI
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop NIFI"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/NIFI
 sleep 120
 
 #copy flow.xml.gz
@@ -39,29 +40,29 @@ cp flow.xml.gz /var/lib/nifi/conf
 chown nifi /var/lib/nifi/conf/flow.xml.gz
 
 #start nifi
-curl -u admin:H0rtonworks\!1 -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start NIFI"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/NIFI
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start NIFI"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/NIFI
 
 #Import Zeppelin
 export FNAME=/tmp/$$.cookies.txt
-curl -c $FNAME -i -s --data 'userName=admin&password=H0rtonworks\!1' -X POST http://demo.hortonworks.com:9995/api/login
+curl -c $FNAME -i -s --data 'userName=${SUSR}&password=${SPWD}' -X POST http://demo.hortonworks.com:9995/api/login
 curl -v -i -b $FNAME -H "Content-Type: application/json" --data "@IOT.json" -X POST http://demo.hortonworks.com:9995/api/notebook/import
 /bin/rm $FNAME
 
 #fix superset python
-/bin/rm /usr/hdp/3.0.1.0-187/superset/lib/python3.4/site-packages/superset/views/__pycache__/core.cpython-34.pyc
-/bin/rm /usr/hdp/3.0.1.0-187/superset/lib/python3.4/site-packages/superset/models/__pycache__/helpers.cpython-34.pyc
-cp core.py /usr/hdp/3.0.1.0-187/superset/lib/python3.4/site-packages/superset/views/core.py
-cp helpers.py /usr/hdp/3.0.1.0-187/superset/lib/python3.4/site-packages/superset/models/helpers.py
+/bin/rm /usr/hdp/current/superset/lib/python3.4/site-packages/superset/views/__pycache__/core.cpython-34.pyc
+/bin/rm /usr/hdp/current/superset/lib/python3.4/site-packages/superset/models/__pycache__/helpers.cpython-34.pyc
+cp core.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/views/core.py
+cp helpers.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/models/helpers.py
 
 #restart superset
-curl -u admin:H0rtonworks\!1 -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop SUPERSET"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/SUPERSET
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop SUPERSET"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/SUPERSET
 sleep 120
-curl -u admin:H0rtonworks\!1 -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start SUPERSET"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/SUPERSET
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start SUPERSET"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/SUPERSET
 sleep 120
 #Import Superset
 #import dashboards
 export FNAME=/tmp/$$.cookies.txt
-curl -s -c $FNAME -u admin:H0rtonworks\!1 -XPOST -d 'username=admin&password=H0rtonworks\!1' http://demo.hortonworks.com:9088/login/
+curl -s -c $FNAME -u ${SUSR}:${SPWD} -XPOST -d 'username=${SUSR}&password=${SPWD}' http://demo.hortonworks.com:9088/login/
 curl -b $FNAME -X POST http://demo.hortonworks.com:9088/superset/import_dashboards -F "file=@superset.json"
 /bin/rm $FNAME
 

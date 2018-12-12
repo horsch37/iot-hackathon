@@ -11,7 +11,7 @@ sudo -u hdfs hdfs dfs -chmod 777 /warehouse/tablespace/managed/hive
 sudo -u hdfs hdfs dfs -chmod 777 /warehouse/tablespace/managed
 sudo -u hdfs hdfs dfs -chmod 777 /warehouse/tablespace
 sudo -u hdfs hdfs dfs -chmod 777 /warehouse
-
+sudo -u hdfs hdfs dfs -chmod 777 /user
 #Create Tables
 
 export HADOOP_CLIENT_OPTS="-Djline.terminal=jline.UnsupportedTerminal"
@@ -32,6 +32,7 @@ fi
 
 #stop nifi
 curl -u admin:H0rtonworks\!1 -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop NIFI"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/NIFI
+sleep 120
 
 #copy flow.xml.gz
 cp flow.xml.gz /var/lib/nifi/conf
@@ -53,9 +54,10 @@ cp core.py /usr/hdp/3.0.1.0-187/superset/lib/python3.4/site-packages/superset/vi
 cp helpers.py /usr/hdp/3.0.1.0-187/superset/lib/python3.4/site-packages/superset/models/helpers.py
 
 #restart superset
-curl -u admin:H0rtonworks\!1 -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop NIFI"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/SUPERSET
-curl -u admin:H0rtonworks\!1 -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start NIFI"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/SUPERSET
-
+curl -u admin:H0rtonworks\!1 -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop SUPERSET"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/SUPERSET
+sleep 120
+curl -u admin:H0rtonworks\!1 -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start SUPERSET"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/SUPERSET
+sleep 120
 #Import Superset
 #import dashboards
 export FNAME=/tmp/$$.cookies.txt

@@ -1,6 +1,6 @@
 #!/bin/bash
 FN=/tmp/$$.txt
-ls -1 /root/demo/data/fans/49* | sort -u > $FN
+ls -1 /opt/demo/data/fans/49* | sort -u > $FN
 while [ 1 -eq 1 ]
 do
  cat $FN | while read DIR

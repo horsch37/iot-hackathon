@@ -8,9 +8,11 @@
     {
       "yarn-site": {
         "properties": {
-          "yarn.nodemanager.resource.cpu-vcores": "1",
-          "yarn.nodemanager.resource.memory-mb": "2048",
-          "yarn.scheduler.maximum-allocation-mb": "26880",
+          "yarn.nodemanager.resource.cpu-vcores": "12",
+          "yarn.scheduler.minimum-allocation-vcores" : "1",
+          "yarn.scheduler.maximum-allocation-vcores" : "1",
+          "yarn.nodemanager.resource.memory-mb": "26880",
+          "yarn.scheduler.maximum-allocation-mb": "2048",
           "yarn.timeline-service.address" : "demo.hortonworks.com:10200",
           "yarn.timeline-service.webapp.address" : "demo.hortonworks.com:8188",
           "yarn.timeline-service.webapp.https.address" : "demo.hortonworks.com:8190",

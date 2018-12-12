@@ -1,8 +1,8 @@
 set hive.druid.overlord.address.default=demo.hortonworks.com:8095;
 set hive.druid.metadata.username=druid;
 set hive.druid.metadata.password=druid;
-set hive.druid.metadata.uri=jdbc:postgres://demo.hortonworks.com:5432/druid;
-set hive.druid.metadata.db.type=postgres;
+set hive.druid.metadata.uri=jdbc:postgresql://demo.hortonworks.com:5432/druid;
+set hive.druid.metadata.db.type=postgresql;
 CREATE EXTERNAL TABLE kafka_druid_iot (`__time` timestamp,id string, v double)
         STORED BY 'org.apache.hadoop.hive.druid.DruidStorageHandler'
         TBLPROPERTIES (

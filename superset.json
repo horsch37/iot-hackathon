@@ -1,0 +1,558 @@
+{
+    "datasources": [
+        {
+            "__DruidDatasource__": {
+                "offset": 0,
+                "user_id": null,
+                "filter_select_enabled": false,
+                "default_endpoint": null,
+                "is_hidden": false,
+                "changed_by_fk": 1,
+                "fetch_values_from": null,
+                "metrics": [
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "MAX(minv)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 1,
+                            "id": 5,
+                            "description": null,
+                            "metric_name": "max__minv",
+                            "json": "{\"type\": \"doubleMax\", \"fieldName\": \"minv\", \"name\": \"max__minv\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "max"
+                        }
+                    },
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "MIN(maxv)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 1,
+                            "id": 6,
+                            "description": null,
+                            "metric_name": "min__maxv",
+                            "json": "{\"type\": \"doubleMin\", \"fieldName\": \"maxv\", \"name\": \"min__maxv\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "min"
+                        }
+                    },
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "SUM(minv)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 1,
+                            "id": 7,
+                            "description": null,
+                            "metric_name": "sum__minv",
+                            "json": "{\"type\": \"doubleSum\", \"fieldName\": \"minv\", \"name\": \"sum__minv\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "sum"
+                        }
+                    },
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "MAX(maxv)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 1,
+                            "id": 8,
+                            "description": null,
+                            "metric_name": "max__maxv",
+                            "json": "{\"type\": \"doubleMax\", \"fieldName\": \"maxv\", \"name\": \"max__maxv\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "max"
+                        }
+                    },
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "MIN(minv)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 1,
+                            "id": 9,
+                            "description": null,
+                            "metric_name": "min__minv",
+                            "json": "{\"type\": \"doubleMin\", \"fieldName\": \"minv\", \"name\": \"min__minv\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "min"
+                        }
+                    },
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "COUNT(*)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 1,
+                            "id": 10,
+                            "description": null,
+                            "metric_name": "count",
+                            "json": "{\"type\": \"count\", \"name\": \"count\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "count"
+                        }
+                    },
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "SUM(maxv)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 1,
+                            "id": 11,
+                            "description": null,
+                            "metric_name": "sum__maxv",
+                            "json": "{\"type\": \"doubleSum\", \"fieldName\": \"maxv\", \"name\": \"sum__maxv\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "sum"
+                        }
+                    }
+                ],
+                "id": 1,
+                "datasource_name": "default.kafka_druid_alert",
+                "description": null,
+                "params": "{\"remote_id\": 1, \"database_name\": \"druid-ambari\"}",
+                "changed_on": {
+                    "__datetime__": "2018-12-04T00:18:25"
+                },
+                "cluster_name": "druid-ambari",
+                "is_featured": false,
+                "cluster": {
+                    "__DruidCluster__": {
+                        "verbose_name": null,
+                        "created_on": {
+                            "__datetime__": "2018-11-16T07:43:47"
+                        },
+                        "changed_on": {
+                            "__datetime__": "2018-12-12T20:04:37"
+                        },
+                        "changed_by_fk": null,
+                        "id": 1,
+                        "metadata_last_refreshed": {
+                            "__datetime__": "2018-12-12T18:40:16"
+                        },
+                        "broker_port": 8888,
+                        "cluster_name": "druid-ambari",
+                        "coordinator_host": "demo.hortonworks.com",
+                        "created_by_fk": null,
+                        "broker_endpoint": "druid/v2",
+                        "coordinator_endpoint": "druid/coordinator/v1",
+                        "coordinator_port": 8081,
+                        "broker_host": "demo.hortonworks.com",
+                        "cache_timeout": null
+                    }
+                },
+                "columns": [
+                    {
+                        "__DruidColumn__": {
+                            "verbose_name": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "min": true,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "column_name": "maxv",
+                            "changed_by_fk": 1,
+                            "type": "DOUBLE",
+                            "datasource_id": 1,
+                            "id": 3,
+                            "avg": false,
+                            "description": null,
+                            "filterable": false,
+                            "created_by_fk": 1,
+                            "sum": true,
+                            "dimension_spec_json": null,
+                            "is_active": true,
+                            "count_distinct": false,
+                            "groupby": false,
+                            "max": true
+                        }
+                    },
+                    {
+                        "__DruidColumn__": {
+                            "verbose_name": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "min": true,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "column_name": "minv",
+                            "changed_by_fk": 1,
+                            "type": "DOUBLE",
+                            "datasource_id": 1,
+                            "id": 4,
+                            "avg": false,
+                            "description": null,
+                            "filterable": false,
+                            "created_by_fk": 1,
+                            "sum": true,
+                            "dimension_spec_json": null,
+                            "is_active": true,
+                            "count_distinct": false,
+                            "groupby": false,
+                            "max": true
+                        }
+                    },
+                    {
+                        "__DruidColumn__": {
+                            "verbose_name": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "min": false,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "column_name": "id",
+                            "changed_by_fk": 1,
+                            "type": "STRING",
+                            "datasource_id": 1,
+                            "id": 5,
+                            "avg": false,
+                            "description": null,
+                            "filterable": true,
+                            "created_by_fk": 1,
+                            "sum": false,
+                            "dimension_spec_json": null,
+                            "is_active": true,
+                            "count_distinct": false,
+                            "groupby": true,
+                            "max": false
+                        }
+                    }
+                ],
+                "cache_timeout": null,
+                "perm": "[druid-ambari].[default.kafka_druid_alert](id:1)",
+                "created_on": {
+                    "__datetime__": "2018-12-04T00:18:24"
+                },
+                "created_by_fk": 1
+            }
+        },
+        {
+            "__DruidDatasource__": {
+                "offset": 0,
+                "user_id": null,
+                "filter_select_enabled": false,
+                "default_endpoint": null,
+                "is_hidden": false,
+                "changed_by_fk": 1,
+                "fetch_values_from": null,
+                "metrics": [
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "COUNT(*)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 2,
+                            "id": 1,
+                            "description": null,
+                            "metric_name": "count",
+                            "json": "{\"type\": \"count\", \"name\": \"count\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "count"
+                        }
+                    },
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "MAX(v)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 2,
+                            "id": 2,
+                            "description": null,
+                            "metric_name": "max__v",
+                            "json": "{\"type\": \"doubleMax\", \"fieldName\": \"v\", \"name\": \"max__v\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "max"
+                        }
+                    },
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "SUM(v)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 2,
+                            "id": 3,
+                            "description": null,
+                            "metric_name": "sum__v",
+                            "json": "{\"type\": \"doubleSum\", \"fieldName\": \"v\", \"name\": \"sum__v\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "sum"
+                        }
+                    },
+                    {
+                        "__DruidMetric__": {
+                            "verbose_name": "MIN(v)",
+                            "is_restricted": false,
+                            "warning_text": null,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "changed_by_fk": 1,
+                            "datasource_id": 2,
+                            "id": 4,
+                            "description": null,
+                            "metric_name": "min__v",
+                            "json": "{\"type\": \"doubleMin\", \"fieldName\": \"v\", \"name\": \"min__v\"}",
+                            "created_by_fk": 1,
+                            "d3format": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "metric_type": "min"
+                        }
+                    }
+                ],
+                "id": 2,
+                "datasource_name": "default.kafka_druid_iot",
+                "description": null,
+                "params": "{\"remote_id\": 2, \"database_name\": \"druid-ambari\"}",
+                "changed_on": {
+                    "__datetime__": "2018-12-04T00:18:25"
+                },
+                "cluster_name": "druid-ambari",
+                "is_featured": false,
+                "cluster": {
+                    "__DruidCluster__": {
+                        "verbose_name": null,
+                        "created_on": {
+                            "__datetime__": "2018-11-16T07:43:47"
+                        },
+                        "changed_on": {
+                            "__datetime__": "2018-12-12T20:04:37"
+                        },
+                        "changed_by_fk": null,
+                        "id": 1,
+                        "metadata_last_refreshed": {
+                            "__datetime__": "2018-12-12T18:40:16"
+                        },
+                        "broker_port": 8888,
+                        "cluster_name": "druid-ambari",
+                        "coordinator_host": "demo.hortonworks.com",
+                        "created_by_fk": null,
+                        "broker_endpoint": "druid/v2",
+                        "coordinator_endpoint": "druid/coordinator/v1",
+                        "coordinator_port": 8081,
+                        "broker_host": "demo.hortonworks.com",
+                        "cache_timeout": null
+                    }
+                },
+                "columns": [
+                    {
+                        "__DruidColumn__": {
+                            "verbose_name": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "min": true,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "column_name": "v",
+                            "changed_by_fk": 1,
+                            "type": "DOUBLE",
+                            "datasource_id": 2,
+                            "id": 1,
+                            "avg": false,
+                            "description": null,
+                            "filterable": false,
+                            "created_by_fk": 1,
+                            "sum": true,
+                            "dimension_spec_json": null,
+                            "is_active": true,
+                            "count_distinct": false,
+                            "groupby": false,
+                            "max": true
+                        }
+                    },
+                    {
+                        "__DruidColumn__": {
+                            "verbose_name": null,
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "min": false,
+                            "changed_on": {
+                                "__datetime__": "2018-12-04T00:18:25"
+                            },
+                            "column_name": "id",
+                            "changed_by_fk": 1,
+                            "type": "STRING",
+                            "datasource_id": 2,
+                            "id": 2,
+                            "avg": false,
+                            "description": null,
+                            "filterable": true,
+                            "created_by_fk": 1,
+                            "sum": false,
+                            "dimension_spec_json": null,
+                            "is_active": true,
+                            "count_distinct": false,
+                            "groupby": true,
+                            "max": false
+                        }
+                    }
+                ],
+                "cache_timeout": null,
+                "perm": "[druid-ambari].[default.kafka_druid_iot](id:2)",
+                "created_on": {
+                    "__datetime__": "2018-12-04T00:18:24"
+                },
+                "created_by_fk": 1
+            }
+        }
+    ],
+    "dashboards": [
+        {
+            "__Dashboard__": {
+                "position_json": "[\n    {\n        \"col\": 1,\n        \"row\": 0,\n        \"size_x\": 16,\n        \"size_y\": 9,\n        \"slice_id\": \"1\"\n    },\n    {\n        \"col\": 17,\n        \"row\": 0,\n        \"size_x\": 32,\n        \"size_y\": 20,\n        \"slice_id\": \"2\"\n    }\n]",
+                "css": "",
+                "description": null,
+                "slug": null,
+                "changed_by_fk": 1,
+                "changed_on": {
+                    "__datetime__": "2018-12-04T00:26:47"
+                },
+                "id": 1,
+                "created_on": {
+                    "__datetime__": "2018-12-04T00:23:32"
+                },
+                "created_by_fk": 1,
+                "slices": [
+                    {
+                        "__Slice__": {
+                            "description": null,
+                            "params": "{\"until\": \"now\", \"timeseries_limit_metric\": null, \"page_length\": 0, \"remote_id\": 1, \"order_by_cols\": [], \"metrics\": [\"count\", \"max__maxv\", \"min__minv\"], \"viz_type\": \"table\", \"row_limit\": 50000, \"having_filters\": [], \"database_name\": \"druid-ambari\", \"table_filter\": false, \"granularity\": \"5 seconds\", \"filters\": [], \"order_desc\": true, \"include_search\": false, \"groupby\": [\"id\"], \"since\": \"60 minutes ago\", \"schema\": \"default.kafka_druid_alert\", \"all_columns\": [], \"table_timestamp_format\": \"%Y-%m-%d %H:%M:%S\", \"include_time\": false, \"datasource_name\": \"default.kafka_druid_alert\", \"datasource\": \"1__druid\", \"druid_time_origin\": null}",
+                            "slice_name": "Alerts",
+                            "changed_on": {
+                                "__datetime__": "2018-12-12T20:33:35"
+                            },
+                            "changed_by_fk": null,
+                            "datasource_id": 1,
+                            "id": 1,
+                            "perm": "[druid-ambari].[default.kafka_druid_alert](id:1)",
+                            "datasource_type": "druid",
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:23:32"
+                            },
+                            "created_by_fk": 1,
+                            "cache_timeout": null,
+                            "datasource_name": "default.kafka_druid_alert",
+                            "viz_type": "table"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "description": null,
+                            "params": "{\"until\": \"now\", \"x_axis_showminmax\": true, \"contribution\": false, \"timeseries_limit_metric\": null, \"remote_id\": 2, \"show_legend\": true, \"y_log_scale\": false, \"metrics\": [\"max__v\", \"min__v\"], \"resample_how\": null, \"viz_type\": \"line\", \"y_axis_showminmax\": true, \"schema\": \"default.kafka_druid_iot\", \"x_axis_label\": \"\", \"rich_tooltip\": true, \"y_axis_format\": \".3s\", \"line_interpolation\": \"linear\", \"num_period_compare\": \"\", \"resample_rule\": null, \"resample_fillmethod\": null, \"database_name\": \"druid-ambari\", \"granularity\": \"5 seconds\", \"show_markers\": false, \"period_ratio_type\": \"growth\", \"x_axis_format\": \"smart_date\", \"left_margin\": \"auto\", \"filters\": [], \"order_desc\": true, \"y_axis_bounds\": [null, null], \"time_compare\": null, \"rolling_type\": \"None\", \"groupby\": [\"id\"], \"show_brush\": false, \"since\": \"60 minutes ago\", \"y_axis_label\": \"\", \"bottom_margin\": \"auto\", \"datasource\": \"2__druid\", \"annotation_layers\": [], \"having_filters\": [], \"datasource_name\": \"default.kafka_druid_iot\", \"color_scheme\": \"bnbColors\", \"druid_time_origin\": null}",
+                            "slice_name": "IOT Data",
+                            "changed_on": {
+                                "__datetime__": "2018-12-12T20:33:35"
+                            },
+                            "changed_by_fk": null,
+                            "datasource_id": 2,
+                            "id": 2,
+                            "perm": "[druid-ambari].[default.kafka_druid_iot](id:2)",
+                            "datasource_type": "druid",
+                            "created_on": {
+                                "__datetime__": "2018-12-04T00:26:10"
+                            },
+                            "created_by_fk": 1,
+                            "cache_timeout": null,
+                            "datasource_name": "default.kafka_druid_iot",
+                            "viz_type": "line"
+                        }
+                    }
+                ],
+                "dashboard_title": "IOT",
+                "json_metadata": "{\"remote_id\": 1, \"filter_immune_slices\": [], \"expanded_slices\": {}, \"timed_refresh_immune_slices\": [], \"filter_immune_slice_fields\": {}, \"default_filters\": \"{}\"}"
+            }
+        }
+    ]
+}

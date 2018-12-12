@@ -22,8 +22,8 @@ do_setup() {
 
 do_start() {
 
-	sudo ./startspark.sh 
-	sudo ./submitdata.sh 
+	 ./startspark.sh 
+	 ./submitdata.sh 
 }
 
 #Execute functions

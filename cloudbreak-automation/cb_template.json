@@ -67,7 +67,7 @@
     "emailNeeded": false,
     "rdsConfigNames": [],
     "ambari": {
-      "blueprintName": "one-node-with-configs",
+      "blueprintName": "one-node-with-configs2",
       "enableSecurity": false,
       "userName": "admin",
       "password": "H0rtonworks!1",

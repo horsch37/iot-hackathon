@@ -1,6 +1,6 @@
 #!/bin/bash
 SUSR=admin
-SPWD=H0rtonworks#1
+SPWD=H0rtonworks\!1
 #Create Topics
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_iot --create --if-not-exists --replication-factor 1 --partitions 1
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_alert --create --if-not-exists --replication-factor 1 --partitions 1

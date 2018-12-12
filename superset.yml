@@ -1,0 +1,103 @@
+databases:
+- database_name: main
+  expose_in_sqllab: true
+  sqlalchemy_uri: mysql+pymysql://superset:XXXXXXXXXX@localhost:3306/superset
+  tables: []
+druid_clusters:
+- broker_host: demo.hortonworks.com
+  broker_port: 8888
+  cluster_name: druid-ambari
+  coordinator_endpoint: druid/coordinator/v1
+  coordinator_host: demo.hortonworks.com
+  datasources:
+  - cluster_name: druid-ambari
+    columns:
+    - column_name: maxv
+      datasource_id: 1
+      max: true
+      min: true
+      sum: true
+      type: DOUBLE
+    - column_name: minv
+      datasource_id: 1
+      max: true
+      min: true
+      sum: true
+      type: DOUBLE
+    - column_name: id
+      datasource_id: 1
+      filterable: true
+      groupby: true
+      type: STRING
+    datasource_name: default.kafka_druid_alert
+    metrics:
+    - datasource_id: 1
+      json: '{"type": "doubleMax", "fieldName": "minv", "name": "max__minv"}'
+      metric_name: max__minv
+      metric_type: max
+      verbose_name: MAX(minv)
+    - datasource_id: 1
+      json: '{"type": "doubleMin", "fieldName": "maxv", "name": "min__maxv"}'
+      metric_name: min__maxv
+      metric_type: min
+      verbose_name: MIN(maxv)
+    - datasource_id: 1
+      json: '{"type": "doubleSum", "fieldName": "minv", "name": "sum__minv"}'
+      metric_name: sum__minv
+      metric_type: sum
+      verbose_name: SUM(minv)
+    - datasource_id: 1
+      json: '{"type": "doubleMax", "fieldName": "maxv", "name": "max__maxv"}'
+      metric_name: max__maxv
+      metric_type: max
+      verbose_name: MAX(maxv)
+    - datasource_id: 1
+      json: '{"type": "doubleMin", "fieldName": "minv", "name": "min__minv"}'
+      metric_name: min__minv
+      metric_type: min
+      verbose_name: MIN(minv)
+    - datasource_id: 1
+      json: '{"type": "count", "name": "count"}'
+      metric_name: count
+      metric_type: count
+      verbose_name: COUNT(*)
+    - datasource_id: 1
+      json: '{"type": "doubleSum", "fieldName": "maxv", "name": "sum__maxv"}'
+      metric_name: sum__maxv
+      metric_type: sum
+      verbose_name: SUM(maxv)
+  - cluster_name: druid-ambari
+    columns:
+    - column_name: v
+      datasource_id: 2
+      max: true
+      min: true
+      sum: true
+      type: DOUBLE
+    - column_name: id
+      datasource_id: 2
+      filterable: true
+      groupby: true
+      type: STRING
+    datasource_name: default.kafka_druid_iot
+    metrics:
+    - datasource_id: 2
+      json: '{"type": "count", "name": "count"}'
+      metric_name: count
+      metric_type: count
+      verbose_name: COUNT(*)
+    - datasource_id: 2
+      json: '{"type": "doubleMax", "fieldName": "v", "name": "max__v"}'
+      metric_name: max__v
+      metric_type: max
+      verbose_name: MAX(v)
+    - datasource_id: 2
+      json: '{"type": "doubleSum", "fieldName": "v", "name": "sum__v"}'
+      metric_name: sum__v
+      metric_type: sum
+      verbose_name: SUM(v)
+    - datasource_id: 2
+      json: '{"type": "doubleMin", "fieldName": "v", "name": "min__v"}'
+      metric_name: min__v
+      metric_type: min
+      verbose_name: MIN(v)

@@ -459,6 +459,9 @@
         },
         {
           "name": "HBASE_REGIONSERVER"
+        },
+        {
+          "name": "TIMELINE_READER"
         }
       ]
     }

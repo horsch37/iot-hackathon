@@ -18,9 +18,13 @@ placeholder
 2) Under Blueprints, create a new blueprint using the below url.
 https://raw.githubusercontent.com/horsch37/iot-hackathon/master/cloudbreak-automation/one-node-hackathon.json
 
+![](/images/bpscreenshot.png)
+
 
 3) Under Cluster Extensions > Recipes, create a “post-cluster-install” recipe with the below url.
 https://raw.githubusercontent.com/horsch37/iot-hackathon/master/cloudbreak-automation/post-cluster-install.sh
+
+![](/images/pciscreenshot.png)
 
 4) Under Cluster Extensions > Recipes, create a “pre-ambari-start” recipe with the below url.
 https://raw.githubusercontent.com/horsch37/iot-hackathon/master/cloudbreak-automation/pre-ambari-start-script.sh

@@ -8,7 +8,7 @@ sudo yum -y install postgresql-server postgresql-contrib git
 sudo git clone https://github.com/horsch37/iot-hackathon /opt/demo
 
 # Source some shared variables
-sudo source /opt/demo/shared.sh
+sudo . /opt/demo/shared.sh
 
 # Setup hostname
 

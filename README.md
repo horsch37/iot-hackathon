@@ -1,3 +1,5 @@
+# IoT Predictive Maintenance Demo
+
 ## Introduction
 Over the last many decades, manufacturers have continuously focused on reducing unplanned downtime costs (amounting to nearly $50 billion annually according to Deloitte).
 

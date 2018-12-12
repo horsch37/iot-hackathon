@@ -1,0 +1,96 @@
+{
+  "general": {
+    "name": "",
+    "credentialName": "anarasimham-aws"
+  },
+  "placement": {
+    "availabilityZone": "us-east-1a",
+    "region": "us-east-1"
+  },
+  "parameters": {},
+  "inputs": {
+    "fs.s3a.access.key": "",
+    "fs.s3a.secret.key": ""
+  },
+  "customDomain": {
+    "clusterNameAsSubdomain": false,
+    "hostgroupNameAsHostname": false
+  },
+  "tags": {
+    "userDefinedTags": {}
+  },
+  "instanceGroups": [
+    {
+      "nodeCount": 1,
+      "group": "master",
+      "type": "GATEWAY",
+      "parameters": {},
+      "template": {
+        "volumeCount": 1,
+        "volumeSize": 100,
+        "rootVolumeSize": 50,
+        "parameters": {
+          "encrypted": false,
+          "platformType": "AWS",
+          "type": "NONE"
+        },
+        "volumeType": "standard",
+        "instanceType": "m5.4xlarge"
+      },
+      "securityGroup": {
+        "securityGroupId": "sg-03652264285409ddd",
+        "securityGroupIds": [
+          "sg-03652264285409ddd"
+        ],
+        "securityRules": []
+      },
+      "recipeNames": [
+        "final-script"
+      ],
+      "recoveryMode": "MANUAL"
+    }
+  ],
+  "stackAuthentication": {
+    "publicKeyId": "_field"
+  },
+  "network": {
+    "parameters": {
+      "subnetId": "subnet-060f9299dad408dcf",
+      "vpcId": "vpc-053cec8b271549314"
+    }
+  },
+  "imageSettings": {
+    "imageCatalog": "cloudbreak-default",
+    "imageId": "2c5cd6ea-7d5b-4004-73f2-27ad2e1ce7a9"
+  },
+  "cluster": {
+    "emailNeeded": false,
+    "rdsConfigNames": [],
+    "ambari": {
+      "blueprintName": "one-node-with-configs",
+      "enableSecurity": false,
+      "userName": "admin",
+      "password": "H0rtonworks!1",
+      "validateRepositories": false,
+      "ambariStackDetails": {
+        "stack": "HDP",
+        "version": "3.0",
+        "stackRepoId": "HDP",
+        "enableGplRepo": false,
+        "verify": false,
+        "repositoryVersion": "3.0.0.0-1634",
+        "versionDefinitionFileUrl": "http://public-repo-1.hortonworks.com/HDP/centos7/3.x/updates/3.0.0.0/HDP-3.0.0.0-1634.xml",
+        "mpacks": [
+          {
+            "name": "hdf-3-2"
+          }
+        ]
+      },
+      "ambariRepoDetailsJson": {
+        "version": "2.7.0.0",
+        "baseUrl": "http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.0.0",
+        "gpgKeyUrl": "http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.0.0/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins"
+      }
+    }
+  }
+}

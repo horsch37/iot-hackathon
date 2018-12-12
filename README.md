@@ -1,18 +1,18 @@
-##Introduction
+## Introduction
 Over the last many decades, manufacturers have continuously focused on reducing unplanned downtime costs (amounting to nearly $50 billion annually according to Deloitte).
 
 Today, the Industrial Internet of Things (IIOT), with huge new volumes of connected sensor data, provides the potential to unleash powerful new insights to optimize manufacturing performance.
 
 This demo shows how HDP and HDF may be leveraged to provide predictive plant maintenance analytics.  It monitors and measures the vibration on two production fans on the shop floor to identify anomalies and potential failures.
 
-##Demo Deployment
+## Demo Deployment
 The demo is deployable through Cloudbreak.  There are 2 options to launch it
 
-###A) Using CB CLI
+### A) Using CB CLI
 
 placeholder
 
-###B) Using CB UI
+### B) Using CB UI
 1) Log in to your CB UI 
 
 2) Under Blueprints, create a new blueprint using the below url.

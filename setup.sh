@@ -66,3 +66,8 @@ curl -b $FNAME -X POST http://demo.hortonworks.com:9088/superset/import_dashboar
 #import datasource
 . /usr/hdp/current/superset/conf/superset-env.sh
 /usr/hdp/current/superset/bin/superset import_datasources -p superset.yml
+
+
+#Run data sim
+nohup ./submitdata.sh >> /var/log/submitdata.log 2>&1 &
+./startspark.sh

@@ -33,6 +33,11 @@ https://raw.githubusercontent.com/horsch37/iot-hackathon/master/cloudbreak-autom
 
 
 5) Create cluster using the above blueprint and recipes
+	- Below are the recommended VM sizes:
+		- OpenStack: m3.4xlarge
+		- AWS: M4.4xlarge (16vCPU, 64GB)
+		- GCS: n1-standard-16 (16vcpu, 60GB)
+		- Azure: D16 (16vCPU, 64GB)
 
 
 ## Architecture

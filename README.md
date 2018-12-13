@@ -12,8 +12,13 @@ The demo is deployable through Cloudbreak.  There are 2 options to launch it
 
 ### A) Using CB CLI
 
-placeholder
+1) ssh to the vm where your CB is deployed
+2) Copy and run the below command, replacing the parameters with your own
 
+```
+cb cluster create --cli-input-json cb_template.json --name hackathon-cluster4 --username anarasimham@hortonworks.com --password hortonworks
+```
+ 
 ### B) Using CB UI
 1) Log in to your CB UI 
 

@@ -1,4 +1,4 @@
-set hive.druid.overlord.address.default=demo.hortonworks.com:8095;
+set hive.druid.overlord.address.default=demo.hortonworks.com:8090;
 set hive.druid.metadata.username=druid;
 set hive.druid.metadata.password=druid;
 set hive.druid.metadata.uri=jdbc:postgresql://demo.hortonworks.com:5432/druid;

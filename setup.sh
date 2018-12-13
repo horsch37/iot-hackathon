@@ -1,7 +1,6 @@
 #!/bin/bash
 SUSR=admin
 SPWD=H0rtonworks\!1
-SPWDNOESC=H0rtonworks!1
 CLUST=anarasimham-hdp3
 #Create Topics
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_iot --create --if-not-exists --replication-factor 1 --partitions 1
@@ -46,7 +45,8 @@ curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo":
 
 #Import Zeppelin
 export FNAME=/tmp/$$.cookies.txt
-curl -c $FNAME -i -s --data 'userName=${SUSR}&password=${SPWDNOESC}' -X POST http://demo.hortonworks.com:9995/api/login
+export DATA="userName=${SUSR}&password=${SPWD}"
+curl -c $FNAME -i -s --data $DATA -X POST http://demo.hortonworks.com:9995/api/login
 curl -v -i -b $FNAME -H "Content-Type: application/json" --data "@IOT.json" -X POST http://demo.hortonworks.com:9995/api/notebook/import
 /bin/rm $FNAME
 
@@ -62,16 +62,19 @@ sleep 120
 curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start SUPERSET"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/SUPERSET
 sleep 120
 #Import Superset
-#import dashboards
-export FNAME=/tmp/$$.cookies.txt
-curl -s -c $FNAME -u ${SUSR}:${SPWD} -XPOST -d 'username=${SUSR}&password=${SPWDNOESC}' http://demo.hortonworks.com:9088/login/
-curl -b $FNAME -X POST http://demo.hortonworks.com:9088/superset/import_dashboards -F "file=@superset.json"
-/bin/rm $FNAME
 
 #import datasource
 . /usr/hdp/current/superset/conf/superset-env.sh
 /usr/hdp/current/superset/bin/superset import_datasources -p superset.yml
 
+sleep 20
+
+#import dashboards
+export FNAME=/tmp/$$.cookies.txt
+export DATA="userName=${SUSR}&password=${SPWD}"
+curl -s -c $FNAME -u ${SUSR}:${SPWD} -XPOST -d $DATA http://demo.hortonworks.com:9088/login/
+curl -b $FNAME -X POST http://demo.hortonworks.com:9088/superset/import_dashboards -F "file=@superset.json"
+/bin/rm $FNAME
 
 #Run data sim
 nohup ./submitdata.sh >> /var/log/submitdata.log 2>&1 &

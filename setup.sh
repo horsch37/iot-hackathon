@@ -1,6 +1,7 @@
 #!/bin/bash
 SUSR=admin
 SPWD=H0rtonworks\!1
+CLUST=anarasimham-hdp3
 #Create Topics
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_iot --create --if-not-exists --replication-factor 1 --partitions 1
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_alert --create --if-not-exists --replication-factor 1 --partitions 1
@@ -32,7 +33,7 @@ if [ $KDI -ne 1 ]; then
 fi
 
 #stop nifi
-curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop NIFI"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/NIFI
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop NIFI"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/NIFI
 sleep 120
 
 #copy flow.xml.gz
@@ -40,7 +41,7 @@ cp flow.xml.gz /var/lib/nifi/conf
 chown nifi /var/lib/nifi/conf/flow.xml.gz
 
 #start nifi
-curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start NIFI"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/NIFI
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start NIFI"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/NIFI
 
 #Import Zeppelin
 export FNAME=/tmp/$$.cookies.txt
@@ -55,9 +56,9 @@ cp core.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/views/
 cp helpers.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/models/helpers.py
 
 #restart superset
-curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop SUPERSET"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/SUPERSET
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop SUPERSET"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/SUPERSET
 sleep 120
-curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start SUPERSET"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/hackathon-cluster/services/SUPERSET
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start SUPERSET"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/SUPERSET
 sleep 120
 #Import Superset
 #import dashboards

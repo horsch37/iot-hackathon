@@ -147,10 +147,10 @@
       "ranger-env": {
         "properties_attributes": {},
         "properties": {
-          "ranger_admin_password": "H0rtonworks!1",
-          "keyadmin_user_password": "H0rtonworks!1",
-          "rangertagsync_user_password": "H0rtonworks!1",
-          "rangerusersync_user_password": "H0rtonworks!1",
+          "ranger_admin_password": "H0rtonworks-1",
+          "keyadmin_user_password": "H0rtonworks-1",
+          "rangertagsync_user_password": "H0rtonworks-1",
+          "rangerusersync_user_password": "H0rtonworks-1",
           "is_solrCloud_enabled": "true",
           "ranger-hdfs-plugin-enabled": "Yes",
           "ranger-hive-plugin-enabled": "Yes",
@@ -163,7 +163,7 @@
       "atlas-env": {
         "properties_attributes": {},
         "properties": {
-          "atlas.admin.password": "H0rtonworks!1"
+          "atlas.admin.password": "H0rtonworks-1"
         }
       }
     },
@@ -307,7 +307,7 @@
       "superset": {
         "properties_attributes": {},
         "properties": {
-          "SECRET_KEY": "H0rtonworks!1",
+          "SECRET_KEY": "H0rtonworks-1",
           "SUPERSET_DATABASE_TYPE": "postgresql",
           "SUPERSET_DATABASE_USER" : "superset",
           "SUPERSET_DATABASE_PASSWORD" : "superset",
@@ -318,8 +318,8 @@
     },
     {
       "nifi-ambari-config": {
-        "nifi.sensitive.props.key": "H0rtonworks!1",
-        "nifi.security.encrypt.configuration.password": "H0rtonworks!1",
+        "nifi.sensitive.props.key": "H0rtonworks-1",
+        "nifi.security.encrypt.configuration.password": "H0rtonworks-1",
         "nifi.max_mem": "4g",
         "nifi.node.protocol.port": "9089",
         "nifi.node.port": "9092"
@@ -327,19 +327,19 @@
     },
     {
       "nifi-properties": {
-        "nifi.sensitive.props.key": "H0rtonworks!1",
+        "nifi.sensitive.props.key": "H0rtonworks-1",
         "nifi.security.user.login.identity.provider": ""
       }
     },
     {
       "nifi-registry-ambari-config": {
-        "nifi.registry.security.encrypt.configuration.password": "H0rtonworks!1"
+        "nifi.registry.security.encrypt.configuration.password": "H0rtonworks-1"
       }
     },
     {
       "nifi-registry-properties": {
-        "nifi.registry.sensitive.props.key": "H0rtonworks!1",
-        "nifi.registry.db.password": "H0rtonworks!1"
+        "nifi.registry.sensitive.props.key": "H0rtonworks-1",
+        "nifi.registry.db.password": "H0rtonworks-1"
       }
     },
     {

@@ -15,9 +15,11 @@ source /opt/demo/shared.sh
 
 # Setup hostname
 CNT=$(grep $HOSTNAME /etc/hosts | wc -l)
+DNAME=$(echo $HOSTNAME | awk "{print substr(\$0 ,index(\$0,\".\")+1,255);}")
 if [ $CNT -eq 0 ] ; then
-   sed -i '/internal/ s/$/ ambari-server.ec2.internal ambari-server. '"$HOSTNAME"'/' /etc/hosts
+   sed -i '/internal/ s/$/ ambari-server.ec2.internal ambari-server.'"$DNAME"' '"$HOSTNAME"'/' /etc/hosts
    hostnamectl set-hostname $HOSTNAME
+   domainname $DNAME
 fi
 
 cd /opt/demo

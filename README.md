@@ -17,10 +17,12 @@ The demo is deployable through Cloudbreak.  There are 2 options to launch it
 
 ```
 git clone https://github.com/horsch37/iot-hackathon
-cb recipe create from-file --file iot-hackathon/cloudbreak-automation/pre-ambari-start-script.sh --name final-pre3 --execution-type pre-ambari-start
-cb recipe create from-file --file iot-hackathon/cloudbreak-automation/post-cluster-install.sh --name final-post3 --execution-type post-cluster-install
-cb mpack create --name hdf-3-2 --url "http://public-repo-1.hortonworks.com/HDF/amazonlinux2/3.x/updates/3.2.0.0/tars/hdf_ambari_mp/hdf-ambari-mpack-3.2.0.0-520.tar.gz"  
-cb cluster create --cli-input-json iot-hackathon/cloudbreak-automation/cb_template.json --name hackathon-cluster4 --username admin@example.com --password hortonworks
+./cb configure --server 127.0.0.1 --username admin@example.com --password hortonworks
+./cb recipe create from-file --file iot-hackathon/cloudbreak-automation/pre-ambari-start-script.sh --name final-pre3 --execution-type pre-ambari-start
+./cb recipe create from-file --file iot-hackathon/cloudbreak-automation/post-cluster-install.sh --name final-post3 --execution-type post-cluster-install
+./cb mpack create --name hdf-3-2 --url "http://public-repo-1.hortonworks.com/HDF/amazonlinux2/3.x/updates/3.2.0.0/tars/hdf_ambari_mp/hdf-ambari-mpack-3.2.0.0-520.tar.gz"  
+#update the first 3 sections of iot-hackathon/cloudbreak-automation/cb_template.json
+./cb cluster create --cli-input-json iot-hackathon/cloudbreak-automation/cb_template.json --name whoville
 ```
  
 ### B) Using CB UI

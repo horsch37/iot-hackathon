@@ -14,9 +14,13 @@ git clone https://github.com/horsch37/iot-hackathon /opt/demo
 source /opt/demo/shared.sh
 
 # Setup hostname
+CNT=$(grep $HOSTNAME /etc/hosts | wc -l)
+if [ $CNT -eq 0 ] ; then
+   sed -i '/internal/ s/$/ '"$HOSTNAME"'/' /etc/hosts
+   hostnamectl set-hostname $HOSTNAME
+fi
 
-#sed -i "s/localhost4.localdomain4/localhost4.localdomain4 $HOSTNAME/g" /etc/hosts
-#hostnamectl set-hostname $HOSTNAME
+cd /opt/demo
 
 # Install some packages
 

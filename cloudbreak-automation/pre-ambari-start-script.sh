@@ -16,7 +16,7 @@ source /opt/demo/shared.sh
 # Setup hostname
 CNT=$(grep $HOSTNAME /etc/hosts | wc -l)
 if [ $CNT -eq 0 ] ; then
-   sed -i '/internal/ s/$/ '"$HOSTNAME"'/' /etc/hosts
+   sed -i '/internal/ s/$/ ambari-server.ec2.internal '"$HOSTNAME"'/' /etc/hosts
    hostnamectl set-hostname $HOSTNAME
 fi
 

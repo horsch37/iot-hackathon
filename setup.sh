@@ -2,6 +2,25 @@
 SUSR=admin
 SPWD=H0rtonworks-1
 CLUST=whoville
+
+#stop all - todo fix cluster input
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo":{"context":"_PARSE_.STOP.ALL_SERVICES","operation_level":{"level":"CLUSTER","cluster_name":"whoville"}},"Body":{"ServiceInfo":{"state":"INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services
+sleep 120
+
+#copy flow.xml.gz
+cp flow.xml.gz /var/lib/nifi/conf
+chown nifi /var/lib/nifi/conf/flow.xml.gz
+
+#fix superset python
+/bin/rm /usr/hdp/current/superset/lib/python3.4/site-packages/superset/views/__pycache__/core.cpython-34.pyc
+/bin/rm /usr/hdp/current/superset/lib/python3.4/site-packages/superset/models/__pycache__/helpers.cpython-34.pyc
+cp core.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/views/core.py
+cp helpers.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/models/helpers.py
+
+#start all - todo fix cluster input
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d ''{"RequestInfo":{"context":"_PARSE_.STOP.ALL_SERVICES","operation_level":{"level":"CLUSTER","cluster_name":"whoville"}},"Body":{"ServiceInfo":{"state":"STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services
+sleep 600
+
 #Create Topics
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_iot --create --if-not-exists --replication-factor 1 --partitions 1
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_alert --create --if-not-exists --replication-factor 1 --partitions 1
@@ -14,8 +33,8 @@ sudo -u hdfs hdfs dfs -chmod 777 /warehouse/tablespace/managed
 sudo -u hdfs hdfs dfs -chmod 777 /warehouse/tablespace
 sudo -u hdfs hdfs dfs -chmod 777 /warehouse
 sudo -u hdfs hdfs dfs -chmod 777 /user
-#Create Tables
 
+#Create Tables
 export HADOOP_CLIENT_OPTS="-Djline.terminal=jline.UnsupportedTerminal"
 export USR=hive
 export PASS=hive
@@ -33,15 +52,15 @@ if [ $KDI -ne 1 ]; then
 fi
 
 #stop nifi
-curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop NIFI"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/NIFI
-sleep 120
+#curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop NIFI"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/NIFI
+#sleep 120
 
 #copy flow.xml.gz
-cp flow.xml.gz /var/lib/nifi/conf
-chown nifi /var/lib/nifi/conf/flow.xml.gz
+#cp flow.xml.gz /var/lib/nifi/conf
+#chown nifi /var/lib/nifi/conf/flow.xml.gz
 
 #start nifi
-curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start NIFI"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/NIFI
+#curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start NIFI"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/NIFI
 
 #Import Zeppelin
 export FNAME=/tmp/$$.cookies.txt
@@ -51,16 +70,16 @@ curl -v -i -b $FNAME -H "Content-Type: application/json" --data "@IOT.json" -X P
 /bin/rm $FNAME
 
 #fix superset python
-/bin/rm /usr/hdp/current/superset/lib/python3.4/site-packages/superset/views/__pycache__/core.cpython-34.pyc
-/bin/rm /usr/hdp/current/superset/lib/python3.4/site-packages/superset/models/__pycache__/helpers.cpython-34.pyc
-cp core.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/views/core.py
-cp helpers.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/models/helpers.py
+#/bin/rm /usr/hdp/current/superset/lib/python3.4/site-packages/superset/views/__pycache__/core.cpython-34.pyc
+#/bin/rm /usr/hdp/current/superset/lib/python3.4/site-packages/superset/models/__pycache__/helpers.cpython-34.pyc
+#cp core.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/views/core.py
+#cp helpers.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/models/helpers.py
 
 #restart superset
-curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop SUPERSET"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/SUPERSET
-sleep 60
-curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start SUPERSET"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/SUPERSET
-sleep 60
+#curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop SUPERSET"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/SUPERSET
+#sleep 60
+#curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start SUPERSET"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/SUPERSET
+#sleep 60
 #Import Superset
 
 #import datasource

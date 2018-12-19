@@ -18,7 +18,7 @@ cp core.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/views/
 cp helpers.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/models/helpers.py
 
 #start all - todo fix cluster input
-curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d ''{"RequestInfo":{"context":"_PARSE_.STOP.ALL_SERVICES","operation_level":{"level":"CLUSTER","cluster_name":"whoville"}},"Body":{"ServiceInfo":{"state":"STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services
+curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo":{"context":"_PARSE_.STOP.ALL_SERVICES","operation_level":{"level":"CLUSTER","cluster_name":"whoville"}},"Body":{"ServiceInfo":{"state":"STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services
 sleep 600
 
 #Create Topics

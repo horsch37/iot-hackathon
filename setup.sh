@@ -5,7 +5,7 @@ CLUST=whoville
 
 #stop all - todo fix cluster input
 curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo":{"context":"_PARSE_.STOP.ALL_SERVICES","operation_level":{"level":"CLUSTER","cluster_name":"whoville"}},"Body":{"ServiceInfo":{"state":"INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services
-sleep 120
+sleep 100
 
 #copy flow.xml.gz
 cp flow.xml.gz /var/lib/nifi/conf
@@ -19,7 +19,7 @@ cp helpers.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/mod
 
 #start all - todo fix cluster input
 curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo":{"context":"_PARSE_.START.ALL_SERVICES","operation_level":{"level":"CLUSTER","cluster_name":"whoville"}},"Body":{"ServiceInfo":{"state":"STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services
-sleep 600
+sleep 350
 
 #Create Topics
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_iot --create --if-not-exists --replication-factor 1 --partitions 1
@@ -97,4 +97,4 @@ curl -b $FNAME -X POST http://demo.hortonworks.com:9088/superset/import_dashboar
 
 #Run data sim
 nohup ./submitdata.sh >> /var/log/submitdata.log 2>&1 &
-./startspark.sh
+#./startspark.sh

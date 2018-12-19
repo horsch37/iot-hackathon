@@ -49,8 +49,11 @@ https://raw.githubusercontent.com/horsch37/iot-hackathon/master/cloudbreak-autom
 		- AWS: M4.4xlarge (16vCPU, 64GB)
 		- GCS: n1-standard-16 (16vcpu, 60GB)
 		- Azure: D16 (16vCPU, 64GB)
-
-
+## Start Spark Streaming Job
+```
+cd /opt/demo
+./startspark.sh
+```
 ## Architecture
 
 ![](/images/architecture.png)

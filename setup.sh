@@ -58,20 +58,20 @@ cp helpers.py /usr/hdp/current/superset/lib/python3.4/site-packages/superset/mod
 
 #restart superset
 curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Stop SUPERSET"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/SUPERSET
-sleep 120
+sleep 60
 curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo": {"context" :"Start SUPERSET"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://demo.hortonworks.com:8080/api/v1/clusters/${CLUST}/services/SUPERSET
-sleep 120
+sleep 60
 #Import Superset
 
 #import datasource
 . /usr/hdp/current/superset/conf/superset-env.sh
 /usr/hdp/current/superset/bin/superset import_datasources -p superset.yml
 
-sleep 20
+sleep 10
 
 #import dashboards
 export FNAME=/tmp/$$.cookies.txt
-export DATA="userName=${SUSR}&password=${SPWD}"
+export DATA="username=${SUSR}&password=${SPWD}"
 curl -s -c $FNAME -u ${SUSR}:${SPWD} -XPOST -d $DATA http://demo.hortonworks.com:9088/login/
 curl -b $FNAME -X POST http://demo.hortonworks.com:9088/superset/import_dashboards -F "file=@superset.json"
 /bin/rm $FNAME

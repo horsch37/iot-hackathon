@@ -3,6 +3,9 @@
 
 # Install some packages
 yum -y install postgresql-server postgresql-contrib git
+yum install -y git sendmail mailx
+systemctl enable sendmail
+service sendmail start
 
 #Clone Repo
 git clone https://github.com/horsch37/iot-hackathon /opt/demo

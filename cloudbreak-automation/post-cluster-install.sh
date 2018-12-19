@@ -3,31 +3,11 @@
 # Globals
 
 source /opt/demo/shared.sh
+CNT=$(grep $HOSTNAME /etc/hosts | wc -l)
+if [ $CNT -eq 0 ] ; then
+   echo " $HOSTNAME" >> /etc/hosts
+   hostnamectl set-hostname $HOSTNAME
+fi
 
-do_prep() {
-
-
-# Install some packages
-yum install -y git sendmail mailx
-systemctl enable sendmail
-
-}
-
-do_setup() {
-
+cd /opt/demo
 ./setup.sh 
-
-
-}
-
-do_start() {
-
-	 ./startspark.sh 
-	 ./submitdata.sh 
-}
-
-#Execute functions
-cd $DEMO_ROOT
-do_prep
-do_setup
-do_start

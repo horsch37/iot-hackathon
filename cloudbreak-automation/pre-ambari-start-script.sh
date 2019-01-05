@@ -2,8 +2,8 @@
 
 
 # Install some packages
-yum -y install postgresql-server postgresql-contrib git
-yum install -y git sendmail mailx
+curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+yum -y install postgresql-server postgresql-contrib git sendmail mailx sbt
 systemctl enable sendmail
 service sendmail start
 

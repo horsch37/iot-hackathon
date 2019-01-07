@@ -22,7 +22,7 @@ curl -u ${SUSR}:${SPWD} -H "X-Requested-By:ambari" -i -X PUT -d '{"RequestInfo":
 sleep 350
 
 #build the spark JAR
-sbt package
+sbt assembly
 
 #Create Topics
 /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper demo.hortonworks.com:2181 --topic kafka_druid_iot --create --if-not-exists --replication-factor 1 --partitions 1

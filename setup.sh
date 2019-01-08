@@ -100,4 +100,4 @@ curl -b $FNAME -X POST http://demo.hortonworks.com:9088/superset/import_dashboar
 
 #Run data sim
 nohup ./submitdata.sh >> /var/log/submitdata.log 2>&1 &
-nohup ./startspark.sh
+nohup ./startspark.sh >> /var/log/startspark.log 2>&1 &

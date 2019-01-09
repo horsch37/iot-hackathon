@@ -13,10 +13,6 @@ git clone https://github.com/horsch37/iot-hackathon /opt/demo
 # Source some shared variables
 source /opt/demo/shared.sh
 
-echo "Sleeping for 30s..." > /var/log/hdp_startup.log
-sleep 30
-curl -sSL https://gist.github.com/abajwa-hw/9d7d06b8d0abf705ae311393d2ecdeec/raw | sudo -E sh >> /var/log/hdp_startup.log
-
 # Setup hostname
 CNT=$(grep $HOSTNAME /etc/hosts | wc -l)
 DNAME=$(echo $HOSTNAME | awk "{print substr(\$0 ,index(\$0,\".\")+1,255);}")

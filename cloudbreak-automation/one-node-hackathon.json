@@ -1,8 +1,8 @@
 {
   "Blueprints": {
-    "blueprint_name": "HDP301 HDF320 Single Node",
+    "blueprint_name": "HDP31 HDF331 Single Node",
     "stack_name": "HDP",
-    "stack_version": "3.0"
+    "stack_version": "3.1"
   },
   "configurations": [
     {
@@ -62,13 +62,15 @@
       "hdfs-site": {
         "properties_attributes": {},
         "properties": {
-          "fs.s3a.access.key": "{{{ fs.s3a.access.key }}}",
-          "fs.s3a.secret.key": "{{{ fs.s3a.secret.key }}}",
           "dfs.namenode.handler.count": "400",
           "dfs.namenode.http-address" : "demo.hortonworks.com:50070",
           "dfs.namenode.https-address" : "demo.hortonworks.com:50470",
           "dfs.namenode.rpc-address" : "demo.hortonworks.com:8020",
-          "dfs.namenode.secondary.http-address" : "demo.hortonworks.com:50090"
+          "dfs.namenode.secondary.http-address" : "demo.hortonworks.com:50090",
+          "dfs.namenode.safemode.threshold-pct": "0.99",
+          "dfs.namenode.name.dir": "/hadoopfs/fs1/hdfs/namenode",
+          "dfs.journalnode.edits.dir": "/hadoopfs/fs1/hdfs/journalnode",
+          "dfs.namenode.checkpoint.dir": "/hadoopfs/fs1/hdfs/namesecondary"
         }
       }
     },
@@ -77,14 +79,22 @@
         "properties_attributes": {},
         "properties": {
           "fs.defaultFS": "hdfs://demo.hortonworks.com:8020",
-          "hadoop.proxyuser.hbase.groups" : "*",
-          "hadoop.proxyuser.hbase.hosts" : "*",
-          "hadoop.proxyuser.hdfs.groups" : "*",
-          "hadoop.proxyuser.hdfs.hosts" : "*",
-          "hadoop.proxyuser.hive.groups" : "*",
-          "hadoop.proxyuser.hive.hosts" : "%HOSTGROUP::master%",
-          "hadoop.proxyuser.livy.groups" : "*",
-          "hadoop.proxyuser.livy.hosts" : "*"
+          "fs.trash.interval": "4320",
+        "proxyuser_group": "hadoop",
+        "hadoop.proxyuser.falcon.groups": "*",
+        "hadoop.proxyuser.root.groups": "*",
+        "hadoop.proxyuser.livy.hosts": "*",
+        "hadoop.proxyuser.falcon.hosts": "*",
+        "hadoop.proxyuser.oozie.hosts": "*",
+        "hadoop.proxyuser.hcat.hosts": "*",
+        "hadoop.proxyuser.oozie.groups": "*",
+        "hadoop.proxyuser.hive.groups": "*",
+        "hadoop.proxyuser.hcat.groups": "*",
+        "hadoop.proxyuser.livy.groups": "*",
+        "hadoop.proxyuser.hbase.groups": "*",
+        "hadoop.proxyuser.hbase.hosts": "*",
+        "hadoop.proxyuser.root.hosts": "*",
+        "hadoop.proxyuser.hive.hosts": "*"
         }
       }
     },
@@ -367,6 +377,24 @@
     {
       "name": "master",
       "cardinality": "1",
+      "configurations": [
+        {
+          "hdfs-site": {
+            "dfs.datanode.data.dir": "/hadoopfs/fs1/hdfs/datanode"
+          }
+        },
+        {
+          "yarn-site": {
+            "yarn.nodemanager.local-dirs": "/hadoopfs/fs1/yarn/nodemanager",
+            "yarn.nodemanager.log-dirs": "/hadoopfs/fs1/yarn/nodemanager/log"
+          }
+        },
+        {
+          "core-site": {
+            "fs.s3a.buffer.dir": "/hadoopfs/fs1/s3-${user.name}"
+          }
+        }
+      ],
       "components": [
         {
           "name": "INFRA_SOLR"

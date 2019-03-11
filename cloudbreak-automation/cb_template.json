@@ -17,23 +17,16 @@
   "cluster": {
     "ambari": {
       "blueprintName": "one-node-with-configs2",
-      "platformVersion": "HDP 3.0",
-      "ambariRepoDetailsJson": {
-        "version": "2.7.1.0",
-        "baseUrl": "http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.1.0",
-        "gpgKeyUrl": "http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.0.0/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins"
-      },
+      "platformVersion": "HDP 3.1",
       "ambariStackDetails": {
-        "version": "3.0",
+        "version": "3.1",
         "verify": false,
-        "enableGplRepo": false,
+        "enableGplRepo": true,
         "stack": "HDP",
-        "repositoryVersion": "3.0.1.0-187",
-        "versionDefinitionFileUrl": "http://public-repo-1.hortonworks.com/HDP/centos7/3.x/updates/3.0.1.0/HDP-3.0.1.0-187.xml",
-        "stackOs": "redhat7",
+        "stackOs": "centos7",
         "mpacks": [
           {
-            "name": "hdf-3-2"
+            "name": "hdf-3-3-1"
           }
         ]
       },

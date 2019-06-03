@@ -52,6 +52,11 @@ sudo -u postgres psql -c "alter user efm with password 'cloudera';"
 sudo -u postgres psql -c "create database efm owner efm;"
 sudo -u postgres psql -c "grant all privileges on database efm to efm;"
 
+sudo -u postgres createuser registry
+sudo -u postgres psql -c "alter user registry with password 'registry';"
+sudo -u postgres psql -c "create database registry owner registry;"
+sudo -u postgres psql -c "grant all privileges on database registry to registry;"
+
 sed -i "s/\(127.0.0.1\/32\s\+\)ident/\1trust/g" /var/lib/pgsql/data/pg_hba.conf 
 sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/data/postgresql.conf
 echo 'host    all          all            0.0.0.0/0  trust' | sudo tee -a /var/lib/pgsql/data/pg_hba.conf

@@ -142,5 +142,5 @@ curl -b $FNAME -X POST http://demo.hortonworks.com:9088/superset/import_dashboar
 /opt/cloudera/cem/nifi-toolkit-1.9.0.1.0.0.0-90/bin/cli.sh registry import-flow-version --input /opt/demo/minifidemo.yml -f af70fb20-06d7-47ab-9ddf-09e30cc9d6dc -u http://demo.hortonworks.com:61080
 
 #Run data sim
-nohup ./submitdata.sh >> /var/log/submitdata.log 2>&1 &
+nohup ./submitdatam.sh >> /var/log/submitdata.log 2>&1 &
 nohup ./startspark.sh >> /var/log/startspark.log 2>&1 &

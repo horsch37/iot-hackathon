@@ -1,0 +1,422 @@
+{
+  "snapshotMetadata" : {
+    "version" : 11,
+    "timestamp" : 1559682651639,
+    "author" : "anonymous"
+  },
+  "flowContents" : {
+    "identifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02",
+    "name" : "root",
+    "processGroups" : [ ],
+    "remoteProcessGroups" : [ {
+      "identifier" : "112ecfcd-74a5-441f-9b47-898665331df7",
+      "name" : "http://demo.hortonworks.com:9092/nifi",
+      "position" : {
+        "x" : 1489.0253944106867,
+        "y" : 91.92082713989521
+      },
+      "targetUri" : "http://demo.hortonworks.com:9092/nifi",
+      "targetUris" : "http://demo.hortonworks.com:9092/nifi",
+      "communicationsTimeout" : "30 secs",
+      "yieldDuration" : "10 sec",
+      "transportProtocol" : "HTTP",
+      "localNetworkInterface" : "",
+      "proxyHost" : "",
+      "inputPorts" : [ {
+        "identifier" : "d4d31176-2159-4fec-82a1-99dade75af81",
+        "name" : "23f7e687-016b-1000-0000-00001cc30332",
+        "remoteGroupId" : "112ecfcd-74a5-441f-9b47-898665331df7",
+        "componentType" : "REMOTE_INPUT_PORT",
+        "targetId" : "23f7e687-016b-1000-0000-00001cc30332",
+        "groupIdentifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+      } ],
+      "outputPorts" : [ ],
+      "componentType" : "REMOTE_PROCESS_GROUP",
+      "groupIdentifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+    } ],
+    "processors" : [ {
+      "identifier" : "7a23e56f-4ad4-4ffe-8eca-ec43460509d7",
+      "name" : "EvaluateJsonPath",
+      "comments" : "",
+      "position" : {
+        "x" : 298.36843489345245,
+        "y" : 102.18510943994744
+      },
+      "bundle" : {
+        "group" : "org.apache.nifi.minifi",
+        "artifact" : "minifi-standard-nar",
+        "version" : "0.6.0.1.0.0.0-54"
+      },
+      "style" : { },
+      "type" : "org.apache.nifi.processors.standard.EvaluateJsonPath",
+      "properties" : {
+        "Destination" : "flowfile-attribute",
+        "v" : "$.v",
+        "Return Type" : "auto-detect",
+        "Null Value Representation" : "empty string",
+        "id" : "$.id",
+        "Path Not Found Behavior" : "ignore"
+      },
+      "propertyDescriptors" : {
+        "Destination" : {
+          "name" : "Destination",
+          "displayName" : "Destination",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Return Type" : {
+          "name" : "Return Type",
+          "displayName" : "Return Type",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Null Value Representation" : {
+          "name" : "Null Value Representation",
+          "displayName" : "Null Value Representation",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Path Not Found Behavior" : {
+          "name" : "Path Not Found Behavior",
+          "displayName" : "Path Not Found Behavior",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        }
+      },
+      "schedulingPeriod" : "0 ms",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "penaltyDuration" : "0 ms",
+      "yieldDuration" : "0 ms",
+      "runDurationMillis" : 0,
+      "concurrentlySchedulableTaskCount" : 10,
+      "autoTerminatedRelationships" : [ "failure", "v", "id", "unmatched" ],
+      "componentType" : "PROCESSOR",
+      "groupIdentifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+    }, {
+      "identifier" : "f14e65ea-670b-4386-a6ca-2344fa520bb9",
+      "name" : "ReplaceText",
+      "comments" : "",
+      "position" : {
+        "x" : 1044.2398413164035,
+        "y" : 107.88749434725128
+      },
+      "bundle" : {
+        "group" : "org.apache.nifi.minifi",
+        "artifact" : "minifi-standard-nar",
+        "version" : "0.6.0.1.0.0.0-54"
+      },
+      "style" : { },
+      "type" : "org.apache.nifi.processors.standard.ReplaceText",
+      "properties" : {
+        "Regular Expression" : "(?s)(^.*$)",
+        "Replacement Value" : "{\"__time\":\"${__time}\",\"id\":\"${id}\",\"v\":${v},\"agent\":\"${agent}\"}",
+        "Evaluation Mode" : "Entire text",
+        "Character Set" : "UTF-8",
+        "Maximum Buffer Size" : "1 MB",
+        "Replacement Strategy" : "Regex Replace"
+      },
+      "propertyDescriptors" : {
+        "Regular Expression" : {
+          "name" : "Regular Expression",
+          "displayName" : "Search Value",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Replacement Value" : {
+          "name" : "Replacement Value",
+          "displayName" : "Replacement Value",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Evaluation Mode" : {
+          "name" : "Evaluation Mode",
+          "displayName" : "Evaluation Mode",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Character Set" : {
+          "name" : "Character Set",
+          "displayName" : "Character Set",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Maximum Buffer Size" : {
+          "name" : "Maximum Buffer Size",
+          "displayName" : "Maximum Buffer Size",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Replacement Strategy" : {
+          "name" : "Replacement Strategy",
+          "displayName" : "Replacement Strategy",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        }
+      },
+      "schedulingPeriod" : "0 ms",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "penaltyDuration" : "0 ms",
+      "yieldDuration" : "0 ms",
+      "runDurationMillis" : 0,
+      "concurrentlySchedulableTaskCount" : 10,
+      "autoTerminatedRelationships" : [ "failure" ],
+      "componentType" : "PROCESSOR",
+      "groupIdentifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+    }, {
+      "identifier" : "5820a9aa-802b-43f9-bebb-01644cdc0392",
+      "name" : "TailFile",
+      "comments" : "",
+      "position" : {
+        "x" : -11.841094937006233,
+        "y" : 99.90411886773592
+      },
+      "bundle" : {
+        "group" : "org.apache.nifi.minifi",
+        "artifact" : "minifi-standard-nar",
+        "version" : "0.6.0.1.0.0.0-54"
+      },
+      "style" : { },
+      "type" : "org.apache.nifi.processors.standard.TailFile",
+      "properties" : {
+        "tailfile-recursive-lookup" : "false",
+        "File Location" : "Local",
+        "tailfile-maximum-age" : "24 hours",
+        "File to Tail" : "/tmp/fandata.txt",
+        "Initial Start Position" : "Beginning of File",
+        "tailfile-lookup-frequency" : "10 minutes",
+        "tail-mode" : "Single file"
+      },
+      "propertyDescriptors" : {
+        "tail-base-directory" : {
+          "name" : "tail-base-directory",
+          "displayName" : "Base directory",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "tailfile-recursive-lookup" : {
+          "name" : "tailfile-recursive-lookup",
+          "displayName" : "Recursive lookup",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "File Location" : {
+          "name" : "File Location",
+          "displayName" : "State Location",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "tailfile-maximum-age" : {
+          "name" : "tailfile-maximum-age",
+          "displayName" : "Maximum age",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Rolling Filename Pattern" : {
+          "name" : "Rolling Filename Pattern",
+          "displayName" : "Rolling Filename Pattern",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "File to Tail" : {
+          "name" : "File to Tail",
+          "displayName" : "File(s) to Tail",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Initial Start Position" : {
+          "name" : "Initial Start Position",
+          "displayName" : "Initial Start Position",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "tailfile-lookup-frequency" : {
+          "name" : "tailfile-lookup-frequency",
+          "displayName" : "Lookup frequency",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "tail-mode" : {
+          "name" : "tail-mode",
+          "displayName" : "Tailing mode",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        }
+      },
+      "schedulingPeriod" : "0 ms",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "penaltyDuration" : "0 ms",
+      "yieldDuration" : "0 ms",
+      "runDurationMillis" : 25,
+      "concurrentlySchedulableTaskCount" : 10,
+      "autoTerminatedRelationships" : [ ],
+      "componentType" : "PROCESSOR",
+      "groupIdentifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+    }, {
+      "identifier" : "708735db-5e2c-410a-9949-aa24c9012ad2",
+      "name" : "UpdateAttribute",
+      "comments" : "",
+      "position" : {
+        "x" : 638.2303351532413,
+        "y" : 106.74699143572343
+      },
+      "bundle" : {
+        "group" : "org.apache.nifi.minifi",
+        "artifact" : "minifi-update-attribute-nar",
+        "version" : "0.6.0.1.0.0.0-54"
+      },
+      "style" : { },
+      "type" : "org.apache.nifi.processors.attributes.UpdateAttribute",
+      "properties" : {
+        "__time" : "${now():format(\"yyyy-MM-dd'T'HH:mm:ss'Z'\")}",
+        "Store State" : "Do not store state",
+        "time" : "${now():format(\"yyyy-MM-dd'T'HH:mm:ss'Z'\")}"
+      },
+      "propertyDescriptors" : {
+        "Delete Attributes Expression" : {
+          "name" : "Delete Attributes Expression",
+          "displayName" : "Delete Attributes Expression",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Store State" : {
+          "name" : "Store State",
+          "displayName" : "Store State",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        },
+        "Stateful Variables Initial Value" : {
+          "name" : "Stateful Variables Initial Value",
+          "displayName" : "Stateful Variables Initial Value",
+          "identifiesControllerService" : false,
+          "sensitive" : false
+        }
+      },
+      "schedulingPeriod" : "0 ms",
+      "schedulingStrategy" : "TIMER_DRIVEN",
+      "penaltyDuration" : "0 ms",
+      "yieldDuration" : "0 ms",
+      "runDurationMillis" : 0,
+      "concurrentlySchedulableTaskCount" : 10,
+      "autoTerminatedRelationships" : [ "__time", "time" ],
+      "componentType" : "PROCESSOR",
+      "groupIdentifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+    } ],
+    "inputPorts" : [ ],
+    "outputPorts" : [ ],
+    "connections" : [ {
+      "identifier" : "5bbd4ba4-cb06-49da-9c6c-9d5f9c3f57a0",
+      "name" : "",
+      "position" : {
+        "x" : 0.0,
+        "y" : 0.0
+      },
+      "source" : {
+        "id" : "708735db-5e2c-410a-9949-aa24c9012ad2",
+        "type" : "PROCESSOR",
+        "groupId" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+      },
+      "destination" : {
+        "id" : "f14e65ea-670b-4386-a6ca-2344fa520bb9",
+        "type" : "PROCESSOR",
+        "groupId" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+      },
+      "labelIndex" : 1,
+      "zIndex" : 0,
+      "selectedRelationships" : [ "success" ],
+      "backPressureObjectThreshold" : 0,
+      "backPressureDataSizeThreshold" : "10000 B",
+      "flowFileExpiration" : "60 seconds",
+      "prioritizers" : [ ],
+      "bends" : [ ],
+      "componentType" : "CONNECTION",
+      "groupIdentifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+    }, {
+      "identifier" : "2070c90c-d376-464e-abb5-7247c8053a17",
+      "name" : "",
+      "position" : {
+        "x" : 0.0,
+        "y" : 0.0
+      },
+      "source" : {
+        "id" : "5820a9aa-802b-43f9-bebb-01644cdc0392",
+        "type" : "PROCESSOR",
+        "groupId" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+      },
+      "destination" : {
+        "id" : "7a23e56f-4ad4-4ffe-8eca-ec43460509d7",
+        "type" : "PROCESSOR",
+        "groupId" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+      },
+      "labelIndex" : 1,
+      "zIndex" : 0,
+      "selectedRelationships" : [ "success" ],
+      "backPressureObjectThreshold" : 0,
+      "backPressureDataSizeThreshold" : "10000 B",
+      "flowFileExpiration" : "60 seconds",
+      "prioritizers" : [ ],
+      "bends" : [ ],
+      "componentType" : "CONNECTION",
+      "groupIdentifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+    }, {
+      "identifier" : "876a9095-1f2d-46e3-8777-e6e6c2aefe5b",
+      "name" : "",
+      "position" : {
+        "x" : 0.0,
+        "y" : 0.0
+      },
+      "source" : {
+        "id" : "f14e65ea-670b-4386-a6ca-2344fa520bb9",
+        "type" : "PROCESSOR",
+        "groupId" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+      },
+      "destination" : {
+        "id" : "23f7e687-016b-1000-0000-00001cc30332",
+        "type" : "REMOTE_INPUT_PORT",
+        "groupId" : "112ecfcd-74a5-441f-9b47-898665331df7",
+        "name" : "23f7e687-016b-1000-0000-00001cc30332"
+      },
+      "labelIndex" : 1,
+      "zIndex" : 0,
+      "selectedRelationships" : [ "success" ],
+      "backPressureObjectThreshold" : 0,
+      "backPressureDataSizeThreshold" : "10000 B",
+      "flowFileExpiration" : "60 seconds",
+      "prioritizers" : [ ],
+      "bends" : [ ],
+      "componentType" : "CONNECTION",
+      "groupIdentifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+    }, {
+      "identifier" : "450b6cbb-deb1-4b99-890b-1efee299727a",
+      "name" : "",
+      "position" : {
+        "x" : 0.0,
+        "y" : 0.0
+      },
+      "source" : {
+        "id" : "7a23e56f-4ad4-4ffe-8eca-ec43460509d7",
+        "type" : "PROCESSOR",
+        "groupId" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+      },
+      "destination" : {
+        "id" : "708735db-5e2c-410a-9949-aa24c9012ad2",
+        "type" : "PROCESSOR",
+        "groupId" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+      },
+      "labelIndex" : 1,
+      "zIndex" : 0,
+      "selectedRelationships" : [ "matched" ],
+      "backPressureObjectThreshold" : 0,
+      "backPressureDataSizeThreshold" : "10000 B",
+      "flowFileExpiration" : "60 seconds",
+      "prioritizers" : [ ],
+      "bends" : [ ],
+      "componentType" : "CONNECTION",
+      "groupIdentifier" : "6551ad4f-62b5-43c1-b305-1888c49b9f02"
+    } ],
+    "labels" : [ ],
+    "funnels" : [ ],
+    "controllerServices" : [ ],
+    "variables" : { },
+    "componentType" : "PROCESS_GROUP"
+  }
+}

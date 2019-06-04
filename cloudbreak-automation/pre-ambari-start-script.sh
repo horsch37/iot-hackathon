@@ -3,8 +3,45 @@
 
 # Install some packages
 curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
-yum -y install https://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
-yum -y install postgresql96-server postgresql96-contrib postgresql96 git sendmail mailx sbt
+
+#Install Postgres 9.6
+if [[ $(cat /etc/system-release|grep -Po Amazon) == "Amazon" ]]; then
+	yum install -y https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-ami201503-96-9.6-2.noarch.rpm
+	yum install -y postgresql96-server postgresql96-contrib
+	service postgresql-9.6 initdb
+
+	echo '' >  /var/lib/pgsql/9.6/data/pg_hba.conf
+	echo 'local all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm           trust		' >> /var/lib/pgsql/9.6/data/pg_hba.conf
+	echo 'host  all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm 0.0.0.0/0 trust		' >> /var/lib/pgsql/9.6/data/pg_hba.conf
+	echo 'host  all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm ::/0      trust		' >> /var/lib/pgsql/9.6/data/pg_hba.conf
+	echo 'local all             all                                     									peer			' >> /var/lib/pgsql/9.6/data/pg_hba.conf
+	echo 'host  all             all             127.0.0.1/32            		 							trust		' >> /var/lib/pgsql/9.6/data/pg_hba.conf
+	echo 'host  all             all             ::1/128                 		 							ident		' >> /var/lib/pgsql/9.6/data/pg_hba.conf
+
+	sudo -u postgres /usr/pgsql-9.6/bin/pg_ctl -D /var/lib/pgsql/9.6/data/ reload
+else
+	yum install -y https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
+	yum install -y postgresql96-server postgresql96-contrib
+	/usr/pgsql-9.6/bin/postgresql96-setup initdb
+
+	echo '' >  /var/lib/pgsql/data/pg_hba.conf
+	echo 'local all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm           trust		' >> /var/lib/pgsql/data/pg_hba.conf
+	echo 'host  all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm 0.0.0.0/0 trust		' >> /var/lib/pgsql/data/pg_hba.conf
+	echo 'host  all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm ::/0      trust		' >> /var/lib/pgsql/data/pg_hba.conf
+	echo 'local all             all                                     									peer			' >> /var/lib/pgsql/data/pg_hba.conf
+	echo 'host  all             all             127.0.0.1/32            		 							trust		' >> /var/lib/pgsql/data/pg_hba.conf
+	echo 'host  all             all             ::1/128													ident		' >> /var/lib/pgsql/data/pg_hba.conf
+
+	sudo -u postgres pg_ctl -D /var/lib/pgsql/data/ reload
+fi
+
+#Set Postgres 9.6 listen port to 5433 to avoid collision with default Postgres instance
+sed -i 's,#port = 5432,port = 5433,g' /var/lib/pgsql/9.6/data/postgresql.conf
+sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/9.6/data/postgresql.conf
+
+systemctl enable postgresql-9.6.service
+systemctl start postgresql-9.6.service
+yum -y install git sendmail mailx sbt
 
 systemctl enable sendmail
 service sendmail start
@@ -26,40 +63,21 @@ fi
 
 cd /opt/demo
 
-# Install some packages
-
-/usr/pgsql-9.6/bin/postgresql96-setup initdb
-systemctl enable postgresql-9.6.service
-systemctl start postgresql-9.6.service
-
 # Setup Postgres Users
 
-sudo -u postgres createuser druid;
-sudo -u postgres psql -c "alter user druid with password 'druid';"
-sudo -u postgres psql -c "create database druid owner druid;"
-sudo -u postgres psql -c "grant all privileges on database druid to druid";
+echo "CREATE DATABASE hive;" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "CREATE USER hive WITH PASSWORD 'hive';" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "GRANT ALL PRIVILEGES ON DATABASE hive TO hive;" | sudo -u postgres psql -U postgres -h localhost -p 5433
 
-sudo -u postgres createuser hive;
-sudo -u postgres psql -c "alter user hive with password 'hive';"
-sudo -u postgres psql -c "create database hive owner hive;"
-sudo -u postgres psql -c "grant all privileges on database hive to hive";
+echo "CREATE DATABASE druid;" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "CREATE USER druid WITH PASSWORD 'druid';" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "GRANT ALL PRIVILEGES ON DATABASE druid TO druid;" | sudo -u postgres psql -U postgres -h localhost -p 5433
 
-sudo -u postgres createuser superset
-sudo -u postgres psql -c "alter user superset with password 'superset';"
-sudo -u postgres psql -c "create database superset owner superset;"
-sudo -u postgres psql -c "grant all privileges on database superset to superset;"
+echo "CREATE DATABASE efm;" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "CREATE USER efm WITH PASSWORD 'cloudera';" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "GRANT ALL PRIVILEGES ON DATABASE efm TO efm;" | sudo -u postgres psql -U postgres -h localhost -p 5433
 
-sudo -u postgres createuser efm
-sudo -u postgres psql -c "alter user efm with password 'cloudera';"
-sudo -u postgres psql -c "create database efm owner efm;"
-sudo -u postgres psql -c "grant all privileges on database efm to efm;"
+echo "CREATE DATABASE registry;" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "CREATE USER registry WITH PASSWORD 'registry';" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "GRANT ALL PRIVILEGES ON DATABASE registry TO registry;" | sudo -u postgres psql -U postgres -h localhost -p 5433
 
-sudo -u postgres createuser registry
-sudo -u postgres psql -c "alter user registry with password 'registry';"
-sudo -u postgres psql -c "create database registry owner registry;"
-sudo -u postgres psql -c "grant all privileges on database registry to registry;"
-
-sed -i "s/\(127.0.0.1\/32\s\+\)ident/\1trust/g" /var/lib/pgsql/9.6/data/pg_hba.conf 
-sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/9.6/data/postgresql.conf
-echo 'host    all          all            0.0.0.0/0  trust' | sudo tee -a /var/lib/pgsql/9.6/data/pg_hba.conf
-systemctl restart postgresql-9.6.service

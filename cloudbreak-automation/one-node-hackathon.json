@@ -142,14 +142,14 @@
         "hive.auto.convert.join.noconditionaltask.size" : "572662306",
         "javax.jdo.option.ConnectionUserName" : "hive",
         "javax.jdo.option.ConnectionPassword" : "hive",
-        "javax.jdo.option.ConnectionURL" : "jdbc:postgresql://localhost:5432/hive"
+        "javax.jdo.option.ConnectionURL" : "jdbc:postgresql://localhost:5433/hive"
       }
     },
     {
       "ranger-admin-site": {
         "properties_attributes": {},
         "properties": {
-          "ranger.jpa.jdbc.url": "jdbc:postgresql://localhost:5432/ranger"
+          "ranger.jpa.jdbc.url": "jdbc:postgresql://localhost:5433/ranger"
         }
       }
     },
@@ -239,7 +239,7 @@
           "druid.metadata.storage.type": "postgresql",
           "druid.metadata.storage.connector.user": "druid",
           "druid.metadata.storage.connector.password": "druid",
-          "druid.metadata.storage.connector.connectURI": "jdbc:postgresql://localhost:5432/druid",
+          "druid.metadata.storage.connector.connectURI": "jdbc:postgresql://localhost:5433/druid",
           "druid.selectors.indexing.serviceName": "druid/overlord",
           "druid.storage.type": "hdfs",
           "druid.extensions.loadList" : "[\"druid-datasketches\", \"druid-hdfs-storage\", \"ambari-metrics-emitter\", \"postgresql-metadata-storage\", \"druid-kafka-indexing-service\"]",
@@ -360,7 +360,7 @@
           "database_name": "registry",
           "registry.storage.query.timeout": "30",
           "registry.schema.cache.expiry.interval": "3600",
-          "registry.storage.connector.connectURI": "jdbc:postgresql://localhost:5432/registry",
+          "registry.storage.connector.connectURI": "jdbc:postgresql://localhost:5433/registry",
           "jar.storage": "/hdf/registry",
           "registry.storage.connector.user": "registry",
           "registry.storage.connector.password": "registry",

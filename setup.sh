@@ -84,9 +84,12 @@ chown -R root:root /opt/cloudera/cem/minifi-toolkit-0.6.0.1.0.0.0-54
 cp /opt/demo/efm.properties /opt/cloudera/cem/efm/conf
 /bin/rm -f /opt/cloudera/cem/minifi/conf/bootstrap.conf
 cp /opt/demo/bootstrap.conf /opt/cloudera/cem/minifi/conf
-sed -i "s/YourHostname/`hostname -f`/g" /opt/cloudera/cem/efm/conf/efm.properties
-sed -i "s/YourHostname/`hostname -f`/g" /opt/cloudera/cem/minifi/conf/bootstrap.conf
+sed -i "s/YourHostname/demo.hortonworks.com/g" /opt/cloudera/cem/efm/conf/efm.properties
+sed -i "s/YourHostname/demo.hortonworks.com/g" /opt/cloudera/cem/minifi/conf/bootstrap.conf
 /opt/cloudera/cem/minifi/bin/minifi.sh install
+
+service efm start
+service minifi start
 
 #Import Zeppelin
 export FNAME=/tmp/$$.cookies.txt

@@ -9,35 +9,17 @@ if [[ $(cat /etc/system-release|grep -Po Amazon) == "Amazon" ]]; then
 	yum install -y https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-6-x86_64/pgdg-ami201503-96-9.6-2.noarch.rpm
 	yum install -y postgresql96-server postgresql96-contrib
 	service postgresql-9.6 initdb
-
-	echo '' >  /var/lib/pgsql/9.6/data/pg_hba.conf
-	echo 'local all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm           trust		' >> /var/lib/pgsql/9.6/data/pg_hba.conf
-	echo 'host  all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm 0.0.0.0/0 trust		' >> /var/lib/pgsql/9.6/data/pg_hba.conf
-	echo 'host  all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm ::/0      trust		' >> /var/lib/pgsql/9.6/data/pg_hba.conf
-	echo 'local all             all                                     									peer			' >> /var/lib/pgsql/9.6/data/pg_hba.conf
-	echo 'host  all             all             127.0.0.1/32            		 							trust		' >> /var/lib/pgsql/9.6/data/pg_hba.conf
-	echo 'host  all             all             ::1/128                 		 							ident		' >> /var/lib/pgsql/9.6/data/pg_hba.conf
-
-	sudo -u postgres /usr/pgsql-9.6/bin/pg_ctl -D /var/lib/pgsql/9.6/data/ reload
 else
 	yum install -y https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
 	yum install -y postgresql96-server postgresql96-contrib
 	/usr/pgsql-9.6/bin/postgresql96-setup initdb
-
-	echo '' >  /var/lib/pgsql/data/pg_hba.conf
-	echo 'local all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm           trust		' >> /var/lib/pgsql/data/pg_hba.conf
-	echo 'host  all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm 0.0.0.0/0 trust		' >> /var/lib/pgsql/data/pg_hba.conf
-	echo 'host  all das,streamsmsgmgr,cloudbreak,registry,ambari,postgres,hive,ranger,rangerdba,rangeradmin,rangerlogger,druid,registry,efm ::/0      trust		' >> /var/lib/pgsql/data/pg_hba.conf
-	echo 'local all             all                                     									peer			' >> /var/lib/pgsql/data/pg_hba.conf
-	echo 'host  all             all             127.0.0.1/32            		 							trust		' >> /var/lib/pgsql/data/pg_hba.conf
-	echo 'host  all             all             ::1/128													ident		' >> /var/lib/pgsql/data/pg_hba.conf
-
-	sudo -u postgres pg_ctl -D /var/lib/pgsql/data/ reload
 fi
 
 #Set Postgres 9.6 listen port to 5433 to avoid collision with default Postgres instance
 sed -i 's,#port = 5432,port = 5433,g' /var/lib/pgsql/9.6/data/postgresql.conf
 sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/9.6/data/postgresql.conf
+sed -i "s/\(127.0.0.1\/32\s\+\)ident/\1trust/g" /var/lib/pgsql/9.6/data/pg_hba.conf 	
+echo 'host    all          all            0.0.0.0/0  trust' | sudo tee -a /var/lib/pgsql/9.6/data/pg_hba.conf
 
 systemctl enable postgresql-9.6.service
 systemctl start postgresql-9.6.service

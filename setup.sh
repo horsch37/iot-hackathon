@@ -89,10 +89,19 @@ cp /opt/demo/efm.properties /opt/cloudera/cem/efm/conf
 cp /opt/demo/bootstrap.conf /opt/cloudera/cem/minifi/conf
 sed -i "s/YourHostname/demo.hortonworks.com/g" /opt/cloudera/cem/efm/conf/efm.properties
 sed -i "s/YourHostname/demo.hortonworks.com/g" /opt/cloudera/cem/minifi/conf/bootstrap.conf
-/opt/cloudera/cem/minifi/bin/minifi.sh install
+#/opt/cloudera/cem/minifi/bin/minifi.sh install
+cp -rp /opt/cloudera/cem/minifi-0.6.0.1.0.0.0-54 /opt/cloudera/cem/minifi2
+cp -rp /opt/cloudera/cem/minifi-0.6.0.1.0.0.0-54 /opt/cloudera/cem/minifi3
+
+sed -i "s/agent-iot-1/agent-iot-2/g" /opt/cloudera/cem/minifi2/conf/bootstrap.conf
+sed -i "s/agent-iot-1/agent-iot-3/g" /opt/cloudera/cem/minifi3/conf/bootstrap.conf
+
+/opt/cloudera/cem/minifi/bin/minifi.sh start
+/opt/cloudera/cem/minifi2/bin/minifi.sh start
+/opt/cloudera/cem/minifi3/bin/minifi.sh start
 
 service efm start
-service minifi start
+#service minifi start
 
 #Import Zeppelin
 export FNAME=/tmp/$$.cookies.txt

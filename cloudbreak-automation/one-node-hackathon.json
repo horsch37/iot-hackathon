@@ -452,6 +452,12 @@
           "name": "ZEPPELIN_MASTER"
         },
         {
+          "name": "REGISTRY_SERVER"
+        },
+        {
+          "name": "NIFI_REGISTRY_MASTER"
+        },
+        {
           "name": "DRUID_HISTORICAL"
         },
         {

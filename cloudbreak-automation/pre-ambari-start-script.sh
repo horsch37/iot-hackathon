@@ -85,3 +85,6 @@ echo "CREATE DATABASE superset;" | sudo -u postgres psql -U postgres -h localhos
 echo "CREATE USER superset WITH PASSWORD 'superset';" | sudo -u postgres psql -U postgres -h localhost -p 5433
 echo "GRANT ALL PRIVILEGES ON DATABASE superset TO superset;" | sudo -u postgres psql -U postgres -h localhost -p 5433
 
+echo "CREATE DATABASE ranger;" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "CREATE USER ranger WITH PASSWORD 'ranger';" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "GRANT ALL PRIVILEGES ON DATABASE ranger TO ranger;" | sudo -u postgres psql -U postgres -h localhost -p 5433

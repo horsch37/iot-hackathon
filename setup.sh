@@ -67,12 +67,15 @@ fi
 
 #Install CEM Tarballs
 mkdir -p /opt/cloudera/cem
+wget http://archive.cloudera.com/CFM/centos7/1.x/updates/1.0.0.0/tars/nifi/nifi-toolkit-1.9.0.1.0.0.0-90-bin.tar.gz -P /opt/cloudera/cem 
 wget https://archive.cloudera.com/CEM/centos7/1.x/updates/1.0.0.0/CEM-1.0.0.0-centos7-tars-tarball.tar.gz -P /opt/cloudera/cem
 tar xzf /opt/cloudera/cem/CEM-1.0.0.0-centos7-tars-tarball.tar.gz -C /opt/cloudera/cem
 tar xzf /opt/cloudera/cem/CEM/centos7/1.0.0.0-54/tars/efm/efm-1.0.0.1.0.0.0-54-bin.tar.gz -C /opt/cloudera/cem
 tar xzf /opt/cloudera/cem/CEM/centos7/1.0.0.0-54/tars/minifi/minifi-0.6.0.1.0.0.0-54-bin.tar.gz -C /opt/cloudera/cem
 tar xzf /opt/cloudera/cem/CEM/centos7/1.0.0.0-54/tars/minifi/minifi-toolkit-0.6.0.1.0.0.0-54-bin.tar.gz -C /opt/cloudera/cem
+tar xzf /opt/cloudera/cem/nifi-toolkit-1.9.0.1.0.0.0-90-bin.tar.gz -C /opt/cloudera/cem
 /bin/rm -f /opt/cloudera/cem/CEM-1.0.0.0-centos7-tars-tarball.tar.gz
+/bin/rm -f /opt/cloudera/cem/nifi-toolkit-1.9.0.1.0.0.0-90-bin.tar.gz
 ln -s /opt/cloudera/cem/efm-1.0.0.1.0.0.0-54 /opt/cloudera/cem/efm
 ln -s /opt/cloudera/cem/minifi-0.6.0.1.0.0.0-54 /opt/cloudera/cem/minifi
 ln -s /opt/cloudera/cem/efm/bin/efm.sh /etc/init.d/efm
@@ -123,6 +126,9 @@ export DATA="username=${SUSR}&password=${SPWD}"
 curl -s -c $FNAME -u ${SUSR}:${SPWD} -XPOST -d $DATA http://demo.hortonworks.com:9088/login/
 curl -b $FNAME -X POST http://demo.hortonworks.com:9088/superset/import_dashboards -F "file=@superset.json"
 /bin/rm $FNAME
+
+#create bucket for CEM
+/opt/cloudera/cem/nifi-toolkit-1.9.0.1.0.0.0-90/bin/cli.sh registry create-bucket -bn IoT -u http://demo.hortonworks.com:61080
 
 #Run data sim
 nohup ./submitdata.sh >> /var/log/submitdata.log 2>&1 &

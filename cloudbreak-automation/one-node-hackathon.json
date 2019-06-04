@@ -322,6 +322,7 @@
           "SUPERSET_DATABASE_USER" : "superset",
           "SUPERSET_DATABASE_PASSWORD" : "superset",
           "SUPERSET_DATABASE_HOSTNAME" : "localhost",
+          "SUPERSET_DATABASE_PORT" : "5433",
           "WTF_CSRF_ENABLED" : "False"
         }
       }

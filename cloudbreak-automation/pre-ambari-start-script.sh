@@ -81,3 +81,7 @@ echo "CREATE DATABASE registry;" | sudo -u postgres psql -U postgres -h localhos
 echo "CREATE USER registry WITH PASSWORD 'registry';" | sudo -u postgres psql -U postgres -h localhost -p 5433
 echo "GRANT ALL PRIVILEGES ON DATABASE registry TO registry;" | sudo -u postgres psql -U postgres -h localhost -p 5433
 
+echo "CREATE DATABASE superset;" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "CREATE USER superset WITH PASSWORD 'superset';" | sudo -u postgres psql -U postgres -h localhost -p 5433
+echo "GRANT ALL PRIVILEGES ON DATABASE superset TO superset;" | sudo -u postgres psql -U postgres -h localhost -p 5433
+

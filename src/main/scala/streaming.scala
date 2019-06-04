@@ -41,7 +41,7 @@ object Hackathon {
         {
          val data = spark.read.json(rdd)
          data.registerTempTable("iot")
-         val df=spark.sql("SELECT max(__time) __time, id, min(v) minv, max(v) maxv FROM iot group by id having max(v)-min(v) > 10")
+         val df=spark.sql("SELECT max(__time) __time, id, agent, min(v) minv, max(v) maxv FROM iot group by id, agent having max(v)-min(v) > 10")
          df.show()
          df.selectExpr("CAST(0 AS STRING) AS key", "to_json(struct(*)) AS value").write.format("kafka").option("kafka.bootstrap.servers", "demo.hortonworks.com:6667").option(
         "topic", "kafka_druid_alert").save()

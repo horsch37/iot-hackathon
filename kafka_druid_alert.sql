@@ -3,7 +3,7 @@ set hive.druid.metadata.username=druid;
 set hive.druid.metadata.password=druid;
 set hive.druid.metadata.uri=jdbc:postgresql://demo.hortonworks.com:5432/druid;
 set hive.druid.metadata.db.type=postgresql;
-CREATE EXTERNAL TABLE kafka_druid_alert (`__time` timestamp, id string, minv double, maxv double)
+CREATE EXTERNAL TABLE kafka_druid_alert (`__time` timestamp, id string, minv double, maxv double, agent string)
         STORED BY 'org.apache.hadoop.hive.druid.DruidStorageHandler'
         TBLPROPERTIES (
         "kafka.bootstrap.servers" = "demo.hortonworks.com:6667",

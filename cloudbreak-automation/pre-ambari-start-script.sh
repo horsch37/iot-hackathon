@@ -3,7 +3,9 @@
 
 # Install some packages
 curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
-yum -y install postgresql-server postgresql-contrib git sendmail mailx sbt
+yum -y install https://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
+yum -y install postgresql96-server postgresql96-contrib postgresql96 git sendmail mailx sbt
+
 systemctl enable sendmail
 service sendmail start
 
@@ -26,9 +28,9 @@ cd /opt/demo
 
 # Install some packages
 
-postgresql-setup initdb
-systemctl start postgresql
-systemctl enable postgresql
+/usr/pgsql-9.6/bin/postgresql96-setup initdb
+systemctl enable postgresql-9.6.service
+systemctl start postgresql-9.6.service
 
 # Setup Postgres Users
 
@@ -57,7 +59,7 @@ sudo -u postgres psql -c "alter user registry with password 'registry';"
 sudo -u postgres psql -c "create database registry owner registry;"
 sudo -u postgres psql -c "grant all privileges on database registry to registry;"
 
-sed -i "s/\(127.0.0.1\/32\s\+\)ident/\1trust/g" /var/lib/pgsql/data/pg_hba.conf 
-sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/data/postgresql.conf
-echo 'host    all          all            0.0.0.0/0  trust' | sudo tee -a /var/lib/pgsql/data/pg_hba.conf
-systemctl restart postgresql
+sed -i "s/\(127.0.0.1\/32\s\+\)ident/\1trust/g" /var/lib/pgsql/9.6/data/pg_hba.conf 
+sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/9.6/data/postgresql.conf
+echo 'host    all          all            0.0.0.0/0  trust' | sudo tee -a /var/lib/pgsql/9.6/data/pg_hba.conf
+systemctl restart postgresql-9.6.service

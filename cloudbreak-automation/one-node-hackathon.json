@@ -365,11 +365,12 @@
           "jar.storage": "/hdf/registry",
           "registry.storage.connector.user": "registry",
           "registry.storage.connector.password": "registry",
+          "registry.storage.db.hostname": "localhost:5433",
           "jar.storage.hdfs.url": "hdfs://localhost:9090",
           "port": "7788",
           "adminPort": "7789",
           "registry.schema.cache.size": "10000",
-          "registry.storage.type": "postgres"
+          "registry.storage.type": "postgresql"
         }
       }
     }

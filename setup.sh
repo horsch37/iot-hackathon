@@ -129,7 +129,7 @@ curl -v -i -b $FNAME -H "Content-Type: application/json" --data "@IOT.json" -X P
 
 sleep 10
 
-#import dashboards
+#import dashboards - these are stale and need refreshed
 export FNAME=/tmp/$$.cookies.txt
 export DATA="username=${SUSR}&password=${SPWD}"
 curl -s -c $FNAME -u ${SUSR}:${SPWD} -XPOST -d $DATA http://demo.hortonworks.com:9088/login/
@@ -138,7 +138,7 @@ curl -b $FNAME -X POST http://demo.hortonworks.com:9088/superset/import_dashboar
 
 #create bucket for CEM
 /opt/cloudera/cem/nifi-toolkit-1.9.0.1.0.0.0-90/bin/cli.sh registry create-bucket -bn IoT -u http://demo.hortonworks.com:61080
-#load flow to the registry
+#load flow to the registry - This is not enough.  Need to find out how to use CEM API.  Also missing bucket lookup and flow creation steps
 /opt/cloudera/cem/nifi-toolkit-1.9.0.1.0.0.0-90/bin/cli.sh registry import-flow-version --input /opt/demo/minifidemo.yml -f af70fb20-06d7-47ab-9ddf-09e30cc9d6dc -u http://demo.hortonworks.com:61080
 
 #Run data sim

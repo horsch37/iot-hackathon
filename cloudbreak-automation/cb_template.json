@@ -23,6 +23,8 @@
         "verify": false,
         "enableGplRepo": true,
         "stack": "HDP",
+        "repositoryVersion": "3.1.4.0-293",
+        "versionDefinitionFileUrl": "http://s3.amazonaws.com/dev.hortonworks.com/HDP/centos7/3.x/BUILDS/3.1.4.0-293/HDP-3.1.4.0-293.xml",
         "stackOs": "centos7",
         "mpacks": [
           {
